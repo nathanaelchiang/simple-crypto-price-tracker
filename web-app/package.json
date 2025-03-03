@@ -1,0 +1,35 @@
+{
+  "name": "nextpricetracker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "13.0.7",
+    "@tanstack/react-query": "^5.67.1",
+    "axios": "^1.2.1",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.0.7",
+    "isomorphic-fetch": "^3.0.0",
+    "isomorphic-unfetch": "^4.0.2",
+    "next": "13.0.7",
+    "next-themes": "^0.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-sparklines": "^1.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/node": "22.13.8",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4",
+    "typescript": "5.8.2"
+  }
+}
