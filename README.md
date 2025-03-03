@@ -15,7 +15,7 @@ Follow the official guide: [Install Tailwind CSS with Next.js](https://tailwindc
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/nathanaelchiang/simple-crypto-price-tracker.git
 cd your-repository
 ```
 
@@ -102,6 +102,9 @@ npx docusaurus start
 
 This will launch the documentation site at [http://localhost:3000](http://localhost:3000), and any changes will automatically reload.
 
+### Documentation Page
+To navigate to documentation pages, press on "Setup" on the top left.
+
 ## Additional Commands
 
 ### Build for Production
@@ -124,9 +127,5 @@ npx docusaurus serve
 
 This will serve the static files at [http://localhost:3000](http://localhost:3000).
 
-# Documentation Page
-To navigate to documentation pages, press on "Setup" on the top left.
-
 ## Need Help?
-
 For more details, refer to the [Docusaurus Documentation](https://docusaurus.io/docs).
