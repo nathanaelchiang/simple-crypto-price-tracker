@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Coin from "./Coin";
 import { coinPassed } from "./CoinSearch";
-import { CoinAPI } from "../types";
+import { CoinAPI } from "../types/types";
 
 /**
  * @function fetchCoins

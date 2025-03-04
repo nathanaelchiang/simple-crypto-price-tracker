@@ -11,32 +11,34 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Real-Time Crypto Tracking',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Our Crypto Price Tracker fetches real-time cryptocurrency data using the CoinGecko API. 
+        With efficient pagination, error handling, and caching, our integration ensures smooth 
+        data updates while avoiding rate limits.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Seamless API Integration',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        We leverage React's Context API and React Query to efficiently manage state. 
+        Search filtering, pagination, and live data updates are all handled seamlessly 
+        to enhance user experience without unnecessary re-renders.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'State Management Simplified',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Stay up-to-date with market trends. Our tracker displays live price changes, 
+        historical trends, and market rankings, giving you the latest insights on your favorite cryptocurrencies.
       </>
     ),
   },

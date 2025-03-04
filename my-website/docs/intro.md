@@ -50,6 +50,12 @@ Add the `@tailwind` directives for each of Tailwind’s layers to your `./styles
 @tailwind utilities;
 ```
 
+### Navigate to the `web-app` Directory
+
+```bash
+cd web-app
+```
+
 ### Start your development server
 
 To install the project dependencies, navigate to the project directory and run `yarn install` to ensure all required packages are installed before starting the development server.

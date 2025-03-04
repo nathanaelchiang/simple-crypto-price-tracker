@@ -1,4 +1,3 @@
-// types.ts
 export interface CoinAPI {
     id: string;
     market_cap_rank: number;
