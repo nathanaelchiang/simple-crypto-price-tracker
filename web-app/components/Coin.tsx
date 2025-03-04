@@ -2,6 +2,12 @@ import React from "react";
 import { useRouter } from "next/router";
 import { CoinProps } from "../types";
 
+/**
+ * @function Coin
+ * @description Renders a row displaying cryptocurrency details in the table.
+ * @param {CoinProps} props - The properties of the cryptocurrency.
+ * @returns {JSX.Element} A table row representing a cryptocurrency.
+ */
 const Coin: React.FC<CoinProps> = ({
   id,
   marketCapRank,
@@ -9,7 +15,7 @@ const Coin: React.FC<CoinProps> = ({
   image,
   symbol,
   price,
-  OneHr = 0, // Default to 0 if undefined
+  OneHr = 0,
   TwoFourHr = 0,
   SevenDays = 0,
 }) => {

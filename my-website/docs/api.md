@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 # API Integration Details
 
-This document outlines how external APIs are integrated into the project, covering how data is fetched, updated, and managed within the application. The approach leverages modern tools like React Query and Axios to handle asynchronous requests, caching, and error handling.
+This document outlines how external APIs are integrated into the project, covering how data is fetched, updated, and managed within the application. Modern tools like React Query and Axios to handle asynchronous requests, caching, and error handling.
 
 ## Overview
 
@@ -13,70 +13,36 @@ The API integration involves:
 - **Caching:** Minimizing redundant requests using React Query’s caching mechanism.
 - **Error Handling:** Managing failed requests gracefully to maintain a smooth user experience.
 
-## Fetching Data with React Query
-
-React Query simplifies data fetching and state management. Below is an example of how to fetch live cryptocurrency prices from an external API:
+## Promise
 
 ```tsx
-import { useQuery } from '@tanstack/react-query';
-
-const fetchPrices = async () => {
-  const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple,cardano,solana&vs_currencies=usd');
-  if (!res.ok) {
-    throw new Error('Network response was not ok');
+const fetchCoins = async (page) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 
+    const { data } = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&price_change_percentage=1h,24h,7d&sparkline=true`
+    );
+    return data;
+  } catch (error) {
+    console.error("Error fetching coins:", error);
+    throw new Error(error.response?.data?.message || "Failed to fetch coin data.");
   }
-  return res.json();
 };
 
-const { data, error, isLoading, refetch } = useQuery(['cryptoPrices'], fetchPrices, {
-  refetchInterval: 60000, // Auto-refresh every 60 seconds
-});
 ```
+### How the Promise Works
+
+- This introduces a delay of 1 second before making the API request, simulating a loading state.
+- Axios is used to make an HTTP GET request to the CoinGecko API.
+- Ensures that the function waits for the API response before proceeding.
+- If the request fails, the error is caught, logged, and thrown for further handling.
 
 ### Key Points:
+
 - **Endpoint:** Data is fetched from the CoinGecko API, which provides live cryptocurrency prices.
-- **Auto-Refresh:** The `refetchInterval` option triggers a data refresh every 60 seconds.
 - **Error Handling:** Any errors during the fetch process are caught and can be handled accordingly.
-- **Manual Refresh:** In addition to automatic updates, you can allow users to manually refresh data:
-  
-  ```tsx
-  <button onClick={() => refetch()}>Refresh Prices</button>
-  ```
+- **Manual Refresh:** Users can manually trigger a refresh to fetch the latest data.
+- **Promise Handling:** Ensures that API requests do not block UI updates, maintaining responsiveness.
 
-## Advanced Data Fetching with Axios
+By leveraging Promises and modern API handling techniques, we ensure a smooth, efficient, and scalable data-fetching experience within the application.
 
-For more robust configurations and additional features like interceptors or custom headers, you might use Axios. Here’s an example:
-
-```tsx
-import axios from 'axios';
-
-const fetchData = async () => {
-  const { data } = await axios.get('https://api.coingecko.com/api/v3/simple/price', {
-    params: {
-      ids: 'bitcoin,ethereum,ripple,cardano,solana',
-      vs_currencies: 'usd',
-    },
-  });
-  return data;
-};
-```
-
-You can integrate this with React Query similarly:
-
-```tsx
-import { useQuery } from '@tanstack/react-query';
-
-const { data, error, isLoading } = useQuery(['cryptoPrices'], fetchData, {
-  refetchInterval: 60000,
-});
-```
-
-## Conclusion
-
-By leveraging React Query and Axios, the project ensures:
-- **Efficient Data Fetching:** With minimal redundant API calls.
-- **Responsive UI:** Through both automatic and manual data refreshing.
-- **Robust Error Handling:** To provide a better user experience even when issues occur.
-
-This setup provides a scalable and maintainable way to integrate and manage API data within your project.
-```

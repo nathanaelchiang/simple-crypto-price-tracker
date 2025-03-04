@@ -5,7 +5,12 @@ import Coin from "./Coin";
 import { coinPassed } from "./CoinSearch";
 import { CoinAPI } from "../types";
 
-// Fetch function with artificial delay
+/**
+ * @function fetchCoins
+ * @description Fetches cryptocurrency market data from the CoinGecko API.
+ * @param {number} page - The page number for pagination.
+ * @returns {Promise<CoinAPI[]>} A promise resolving to an array of cryptocurrency data.
+ */
 const fetchCoins = async (page: number): Promise<CoinAPI[]> => {
 // Slight delay to avoid API rate limits
   await new Promise((resolve) => setTimeout(resolve, 1000)); 

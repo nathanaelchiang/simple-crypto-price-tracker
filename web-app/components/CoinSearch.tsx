@@ -1,9 +1,17 @@
 import React, { useState, createContext } from "react";
 import CoinTable from "./CoinTable";
 
-// Create a context with a default value
+/**
+ * @constant {React.Context<string | undefined>} coinPassed
+ * @description React context to store the search term for filtering cryptocurrencies.
+ */
 const coinPassed = createContext<string | undefined>(undefined);
 
+/**
+ * @function CoinSearch
+ * @description Component that provides a search bar to filter cryptocurrencies by name or symbol.
+ * @returns {JSX.Element} The search bar component.
+ */
 const CoinSearch: React.FC = () => {
   const [search, setSearch] = useState<string>("");
 

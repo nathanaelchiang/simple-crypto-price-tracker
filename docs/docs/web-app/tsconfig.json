@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "../../../my-website/docs/web-app/web-app/next-env.d.ts",
+    "../../../my-website/docs/web-app/**/*.ts",
+    "../../../my-website/docs/web-app/**/*.tsx"
+, "../../../my-website/docs/web-app/web-app/postcss.confiweb-app/tailwind.config.jsonfig.js"  ],
+  "exclude": [
+    "../../../my-website/docs/web-app/node_modules"
+  ]
+}

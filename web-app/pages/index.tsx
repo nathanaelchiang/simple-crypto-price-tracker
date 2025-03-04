@@ -4,6 +4,11 @@ import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
 import CoinSearch from '../components/CoinSearch';
 
+/**
+ * @function Home
+ * @description The home page component of the Crypto Price Tracker.
+ * @returns {JSX.Element} The main page containing the cryptocurrency search and table.
+ */
 export default function Home() {
   const { theme, setTheme } = useTheme();
   const router = useRouter();

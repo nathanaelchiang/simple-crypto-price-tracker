@@ -1,31 +1,62 @@
-# State Management Explanation
+---
+sidebar_position: 3
+---
+# State Management
 
-Managing state efficiently is critical in modern web applications to ensure a responsive UI, minimize redundant data fetching, and simplify the codebase. In this project, we have chosen to utilize **React Query**, **Zustand**, and the **Context API** for state management, each serving specific purposes.
+## Overview
+This project uses **React Query** to manage state, specifically for fetching and caching cryptocurrency market data from the CoinGecko API. Additionally, React's built-in **useState** and **useContext** are used for handling local component state and search filtering.
 
-## React Query
+## Why React Query?
+React Query was chosen for the following reasons:
+1. **Automatic Caching and Background Fetching**: React Query caches previously fetched cryptocurrency data, reducing redundant API calls while keeping data fresh.
+2. **Pagination Support**: The query key pattern `['coins', page]` enables efficient pagination, reducing memory usage and API rate limit concerns.
+3. **Retry and Error Handling**: Automatic retries (`retry: 3`) and user-friendly error messages ensure better user experience in case of network failures.
+4. **Stale Time and Prefetching**: Setting `staleTime: 60000` (1 minute) helps minimize unnecessary re-fetches, while `keepPreviousData: true` ensures smooth pagination by retaining old data during loading.
+5. **Simplified Data Fetching**: The `useQuery` hook abstracts API request logic, making components cleaner and more maintainable.
 
-**Purpose:**  
-- **Remote Data Management:** Handles asynchronous data fetching, caching, and updates from external APIs.
-- **Automatic Updates:** Supports background re-fetching with configurable intervals.
-- **Error Handling:** Simplifies error management with built-in support for retries and status indicators.
-
-**Why React Query?**  
-- **Optimized Performance:** Minimizes unnecessary re-fetches by caching responses.
-- **Simplicity:** Offers an easy-to-use API to manage server state with minimal boilerplate.
-- **Resilience:** Improves user experience by gracefully handling loading states and errors.
-
-**Example Usage:**
+## State Management Breakdown
+### **1. Global Data Fetching with React Query**
+- **Fetching Coin Data**
+  - Implemented via `useQuery` with `fetchCoins(page)`.
+  - Uses `queryKey: ['coins', page]` for pagination.
+  - Implements caching, error handling, and automatic refetching.
+  
 ```tsx
-import { useQuery } from '@tanstack/react-query';
+const { data: coins = [], error, isLoading, isFetching } = useQuery<CoinAPI[], Error>({
+  queryKey: ['coins', page],
+  queryFn: () => fetchCoins(page),
+  enabled: !!page,
+  retry: 2,
+  placeholderData: (previousData) => previousData,
+});
+```
 
-const fetchData = async () => {
-  const response = await fetch('https://api.example.com/data');
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
+### **2. Local State for Search Filtering**
+- Implemented using `useState` and `useContext`.
+- `coinPassed` (React Context) is used to pass the search term from `CoinSearch` to `CoinTable`.
+- Filters cryptocurrency list before rendering.
+
+```tsx
+const [search, setSearch] = useState<string>("");
+<coinPassed.Provider value={search}>
+  <CoinTable />
+</coinPassed.Provider>
+```
+
+### **3. Pagination with useState**
+- Page state is managed with `useState` in `CoinTable`.
+- Uses `setPage(page + 1)` and `setPage(page - 1)` to handle navigation.
+
+```tsx
+const [page, setPage] = useState<number>(1);
+
+const handleNextPage = () => {
+  if (coins.length === 100) setPage(page + 1);
 };
 
-const { data, isLoading, error } = useQuery(['apiData'], fetchData, {
-  refetchInterval: 60000, // Refresh data every 60 seconds
-});
+const handlePrevPage = () => {
+  if (page > 1) setPage(page - 1);
+};
+```
+
+

@@ -2,7 +2,13 @@ import fetch from 'isomorphic-unfetch';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
-
+/**
+ * @function CoinPage
+ * @description Renders detailed information about a specific cryptocurrency.
+ * @param {Object} props - The properties containing coin data.
+ * @param {Object} props.coin - The coin data fetched from the API.
+ * @returns {JSX.Element} A component displaying cryptocurrency details.
+ */
 const CoinPage = ({coin}) => {
     const {theme, setTheme} = useTheme()
     return (
@@ -24,6 +30,14 @@ const CoinPage = ({coin}) => {
  
 export default CoinPage;
 
+
+/**
+ * @function getServerSideProps
+ * @description Fetches cryptocurrency details server-side based on the coin ID from the query.
+ * @param {Object} context - The Next.js context object.
+ * @param {Object} context.query - The query parameters from the request.
+ * @returns {Promise<Object>} Props containing the fetched coin data.
+ */
 export async function getServerSideProps(context) {
     const { id } = context.query;
         const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`);
